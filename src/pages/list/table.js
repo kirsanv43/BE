@@ -1,5 +1,5 @@
 import React from 'react';
-import { Author, SortableHeader, Table, Row, Cell } from './styledTegs';
+import { Author, SortableHeader, Table, Row, Cell, HeaderCell } from './styledTegs';
 import { FIELDS_NAMES } from '../../constants';
 
 const putComma = (index, authors) => {
@@ -44,16 +44,16 @@ const TableComponent = ({
         <SortableHeader onClick={handleSort} data-active={sortField === FIELDS_NAMES.TITLE} data-name={FIELDS_NAMES.TITLE}>
           Title {getSortMethod(FIELDS_NAMES.TITLE, sortField, method)}
         </SortableHeader>
-        <th>Authors</th>
-        <th>Pages count</th>
-        <th>Publisher name</th>
+        <HeaderCell>Authors</HeaderCell>
+        <HeaderCell>Pages count</HeaderCell>
+        <HeaderCell>Publisher name</HeaderCell>
         <SortableHeader onClick={handleSort} data-active={sortField === FIELDS_NAMES.YEAR} data-name={FIELDS_NAMES.YEAR}>
           Year of publication{' '}
           {getSortMethod(FIELDS_NAMES.YEAR, sortField, method)}
         </SortableHeader>
-        <th>Release date</th>
-        <th>ISBN</th>
-        <th />
+        <HeaderCell>Release date</HeaderCell>
+        <HeaderCell>ISBN</HeaderCell>
+        <HeaderCell />
       </tr>
     </thead>
     <tbody>

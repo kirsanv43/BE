@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { createBook, updateBook } from '../../actions';
 import Book from './book';
 import { getBookById } from '../../selectors';
-// export { default as Book} from './book'
 
 export default connect(
   (state, props) => {

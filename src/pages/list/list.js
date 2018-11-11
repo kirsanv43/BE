@@ -5,10 +5,6 @@ import { Header } from '../../components';
 
 
 export default class List extends Component {
-  handlerCurrencyChange = e => {
-    this.props.setConvertCurrecy(e.target.value);
-  };
-
   handleOnRowClick = e => {
     this.props.history.push(`/book/${e.currentTarget.dataset.id}`);
   };

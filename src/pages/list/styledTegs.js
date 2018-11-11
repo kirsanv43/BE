@@ -8,7 +8,12 @@ export const HeadControls = styled.section`
   margin: 10px 0;
 `;
 
-export const SortableHeader = styled.th`
+export const HeaderCell = styled.th`
+  padding: 5px;
+  text-align: left;
+`;
+
+export const SortableHeader = styled(HeaderCell)`
   background-color: ${props => (props['data-active'] ? 'pink' : 'default')}
   &:hover {
     cursor: pointer;
@@ -22,6 +27,8 @@ export const Table = styled.table`
 export const Cell = styled.td`
   padding: 5px;
 `;
+
+
 
 export const Row = styled.tr`
   &:hover {

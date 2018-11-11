@@ -15,21 +15,14 @@ const BookForm = styled.form`
 const BookFormLayout = styled.div``;
 
 class Book extends Component {
-  constructor(props) {
-    super(props);
-    const { id } = props.match.params;
-    // this.props.fetchCurrency({ id, currency });
-  }
-
-  componentWillUnmount() {
-    this.props.resetCurrencyData();
-  }
-
-  handlePhotoUpload = e => {
-    this.props.change('wefwef', e.target.files);
+  onSubmit = (data) => {
+    if(this.props.match.params.id !== 'new') {
+      this.props.updateBook(data)
+    } else {
+      this.props.createBook(data)
+    }
+    this.props.history.push(`/`); 
   };
-
-  onSubmit = () => {};
 
   render() {
     const { handleSubmit } = this.props;

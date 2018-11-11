@@ -1,16 +1,21 @@
 import { connect } from 'react-redux';
-import { fetchCurrency, resetCurrencyData } from '../../actions';
+import { createBook, updateBook } from '../../actions';
 import Book from './book';
+import { getBookById } from '../../selectors';
 // export { default as Book} from './book'
 
-
-
 export default connect(
-    state => ({
-      currency: state.currency.data
-    }),
-    {
-      fetchCurrency,
-      resetCurrencyData
+  (state, props) => {
+    const { id } = props.match.params;
+    const data = {};
+    if (id !== 'new') {
+      data.initialValues = getBookById(id);
     }
-  )(Book);
+
+    return data;
+  },
+  {
+    createBook,
+    updateBook,
+  }
+)(Book);

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
-import currencies from './currencies'
-import currency from './currency'
+import books from './books'
 import { reducer as form } from 'redux-form'
 
-export default combineReducers({currencies, currency, form})
+export default combineReducers({books, form})

@@ -16,7 +16,7 @@ export default class List extends Component {
   };
 
   handleOnRowClick = e => {
-    this.props.history.push(`/book/new`);
+    this.props.history.push(`/book/${e.currentTarget.dataset.id}`);
     console.log(e.currentTarget.dataset.id);
   };
 
@@ -24,6 +24,12 @@ export default class List extends Component {
     this.props.history.push(`/book/new`);
     console.log(e.currentTarget.dataset.id);
   };
+
+  handleBookDelete = e => {
+    e.stopPropagation();
+    this.props.deleteBook(e.currentTarget.dataset.id)
+  };
+
 
   render() {
     const { currency, loading } = this.props;
@@ -39,6 +45,7 @@ export default class List extends Component {
           data={this.props.data}
           currency={currency}
           onRowClick={this.handleOnRowClick}
+          handleBookDelete={this.handleBookDelete}
         />
       </div>
     );

@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
+
 import {
-    fetchCurrencies,
-    nextCurrencyPage,
-    prevCurrencyPage,
-    setConvertCurrecy
+  deleteBook
   } from '../../actions';
 import List from './list';
 
@@ -11,12 +9,9 @@ import List from './list';
 
 export default connect(
     state => ({
-      data: state.currencies.data
+      data: state.books.books
     }),
     {
-      fetchCurrencies,
-      nextCurrencyPage,
-      prevCurrencyPage,
-      setConvertCurrecy
+      deleteBook
     }
   )(List);

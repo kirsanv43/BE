@@ -1,5 +1,10 @@
 import { createAction } from 'redux-actions';
 
+export const createBook = createAction('CREATE_BOOK')
+export const updateBook = createAction('UPDATE_BOOK')
+export const deleteBook = createAction('DELETE_BOOK')
+
+
 
 export const fetchCurrencies = createAction('FETCH_CURRENCIES')
 export const nextCurrencyPage = createAction('NEXT_CURRENCY_PAGE')

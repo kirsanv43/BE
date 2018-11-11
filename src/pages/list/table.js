@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-const Table = ({ currency, data, loading, onRowClick }) => (
+const Table = ({ currency, data, loading, onRowClick, handleBookDelete }) => (
   <table className="dataTable">
     <thead>
       <tr>
@@ -13,29 +13,22 @@ const Table = ({ currency, data, loading, onRowClick }) => (
         <th>Year of publication</th>
         <th>Release date</th>
         <th>ISBN</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       {loading
         ? <tr><td>Loading...</td></tr>
-        : data.map(item => (
+        : data.map((item, index) => (
             <tr key={item.id} data-id={item.id} onClick={onRowClick}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.symbol}</td>
-              <td>
-                {currency}:{' '}
-                {item.quotes[currency] && item.quotes[currency].market_cap}
-              </td>
-              <td>
-                {currency}:{' '}
-                {item.quotes[currency] && item.quotes[currency].price}
-              </td>
-              <td>{item.circulating_supply}</td>
-              <td>
-                {currency}:{' '}
-                {item.quotes[currency] && item.quotes[currency].volume_24h}
-              </td>
+              <td>{item.title}</td>
+              <td>{item.authors.map(author => <span>{`${author.firstName} ${author.lastName}`}</span>)}</td>
+              <td>{item.pages}</td>
+              <td>{item.publisher}</td>
+              <td>{item.year}</td>
+              <td>{item.releaseDate}</td>
+              <td>{item.isbn}</td>
+              <td><button data-id={item.id} onClick={handleBookDelete}>Delete</button></td>
             </tr>
           ))}
     </tbody>

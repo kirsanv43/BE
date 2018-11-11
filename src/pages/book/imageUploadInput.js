@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { StyledInput, Error, FieldContainer, Image } from './styledTegs';
+import { StyledInput, FieldContainer, Image } from './styledTegs';
 
 const onChange = cb => e => {
   const file = e.target.files[0];
@@ -24,12 +23,10 @@ const ImageUploadInput = ({
   ...props
 }) => {
   const { value, ...inputProps } = input;
-  console.log(value);
-  
+
   return (
     <FieldContainer>
       <label htmlFor={input.name}>{label}</label>
-      <Image src={value}/>
       <div>
         <StyledInput
           {...inputProps}
@@ -38,10 +35,9 @@ const ImageUploadInput = ({
           onChange={onChange(input.onChange)}
           onBlur={onChange(input.onBlur)}
           type={type}
-          error={touched && error}
         />
-        {touched && error && <Error>{error}</Error>}
       </div>
+      <Image src={value}/>
     </FieldContainer>
   );
 };

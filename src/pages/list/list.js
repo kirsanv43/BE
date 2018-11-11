@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import './list.css';
-
 import Table from './table';
+import { HeadControls } from './styledTegs';
+import { Header } from '../../components';
 
-import styled from 'styled-components';
-
-const HeadControls = styled.section`
-  display: flex;
-  justify-content: space-between;
-`;
 
 export default class List extends Component {
   handlerCurrencyChange = e => {
@@ -17,25 +11,28 @@ export default class List extends Component {
 
   handleOnRowClick = e => {
     this.props.history.push(`/book/${e.currentTarget.dataset.id}`);
-    console.log(e.currentTarget.dataset.id);
   };
 
   handleOnCreateBook = e => {
     this.props.history.push(`/book/new`);
-    console.log(e.currentTarget.dataset.id);
   };
 
   handleBookDelete = e => {
     e.stopPropagation();
     this.props.deleteBook(e.currentTarget.dataset.id)
   };
-
-
+  handleSort = e => {
+    const name = e.currentTarget.dataset.name
+    this.props.sort({
+      name
+    })
+  };
+  
   render() {
-    const { currency, loading } = this.props;
+    const { currency, loading, method, sortField } = this.props;
     return (
       <div className="container">
-        <header>Books</header>
+        <Header>Books</Header>
         <HeadControls>
           <button onClick={this.handleOnCreateBook}>Add book</button>
         </HeadControls>
@@ -44,8 +41,11 @@ export default class List extends Component {
           loading={loading}
           data={this.props.data}
           currency={currency}
-          onRowClick={this.handleOnRowClick}
+          handleRowClick={this.handleOnRowClick}
           handleBookDelete={this.handleBookDelete}
+          handleSort={this.handleSort}
+          method={method}
+          sortField={sortField}
         />
       </div>
     );

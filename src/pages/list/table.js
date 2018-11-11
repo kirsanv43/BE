@@ -1,37 +1,79 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Author, SortableHeader, Table, Row, Cell } from './styledTegs';
+import { FIELDS_NAMES } from '../../constants';
 
+const putComma = (index, authors) => {
+  if (authors.length === 1) {
+    return false;
+  }
 
+  if (authors.length - 1 !== index) {
+    return true;
+  }
+};
 
-const Table = ({ currency, data, loading, onRowClick, handleBookDelete }) => (
-  <table className="dataTable">
+const authors = (author, index, authors) => (
+  <Author key={author.firstName + author.lastName}>
+    {`${author.firstName} ${author.lastName}${
+      putComma(index, authors) ? ',' : ''
+    }`}
+  </Author>
+);
+
+const getSortMethod = (fieldName, sortField, method) => {
+  if (fieldName !== sortField) {
+    return null;
+  }
+
+  return `(${method.toLowerCase()})`;
+};
+
+const TableComponent = ({
+  currency,
+  data,
+  loading,
+  handleRowClick,
+  handleBookDelete,
+  handleSort,
+  method,
+  sortField
+}) => (
+  <Table>
     <thead>
       <tr>
-        <th>title</th>
-        <th>authors</th>
+        <SortableHeader onClick={handleSort} data-active={sortField === FIELDS_NAMES.TITLE} data-name={FIELDS_NAMES.TITLE}>
+          Title {getSortMethod(FIELDS_NAMES.TITLE, sortField, method)}
+        </SortableHeader>
+        <th>Authors</th>
         <th>Pages count</th>
         <th>Publisher name</th>
-        <th>Year of publication</th>
+        <SortableHeader onClick={handleSort} data-active={sortField === FIELDS_NAMES.YEAR} data-name={FIELDS_NAMES.YEAR}>
+          Year of publication{' '}
+          {getSortMethod(FIELDS_NAMES.YEAR, sortField, method)}
+        </SortableHeader>
         <th>Release date</th>
         <th>ISBN</th>
-        <th></th>
+        <th />
       </tr>
     </thead>
     <tbody>
-      {loading
-        ? <tr><td>Loading...</td></tr>
-        : data.map((item, index) => (
-            <tr key={item.id} data-id={item.id} onClick={onRowClick}>
-              <td>{item.title}</td>
-              <td>{item.authors.map(author => <span>{`${author.firstName} ${author.lastName}`}</span>)}</td>
-              <td>{item.pages}</td>
-              <td>{item.publisher}</td>
-              <td>{item.year}</td>
-              <td>{item.releaseDate}</td>
-              <td>{item.isbn}</td>
-              <td><button data-id={item.id} onClick={handleBookDelete}>Delete</button></td>
-            </tr>
-          ))}
+      {data && data.map((item, index) => (
+          <Row key={item.id} data-id={item.id} onClick={handleRowClick}>
+            <Cell>{item.title}</Cell>
+            <Cell>{item.authors.map(authors)}</Cell>
+            <Cell>{item.pages}</Cell>
+            <Cell>{item.publisher}</Cell>
+            <Cell>{item.year}</Cell>
+            <Cell>{item.releaseDate}</Cell>
+            <Cell>{item.isbn}</Cell>
+            <Cell>
+              <button data-id={item.id} onClick={handleBookDelete}>
+                Delete
+              </button>
+            </Cell>
+          </Row>
+        ))}
     </tbody>
-  </table>
+  </Table>
 );
-export default Table;
+export default TableComponent;

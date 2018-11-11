@@ -1,4 +1,5 @@
-export const DEFAULT_CURRENCY = "USD"
-export const CURRENCIES_OPTIONS = [
-    "RUB", "EUR", DEFAULT_CURRENCY, "BTC", "ETH", "XRP", "LTC", "BCH"
-]
+import * as FIELDS from './fields';
+import * as SORT from './sort';
+
+export const FIELDS_NAMES = FIELDS;
+export const SORT_METHODS = SORT;

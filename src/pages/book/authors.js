@@ -1,35 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FieldContainer, Error } from './styledTegs';
-import { Field } from 'redux-form';
-import CustomInput from './customInput';
+import { Error, DeleteAuthorButton } from './styledTegs';
+import { FirstName, SecondName } from './fields';
+import { Author } from './styledTegs';
 
 const renderAuthor = (member, index, fields) => (
-  <li key={index}>
-    <Field
-      label="First name"
-      name={`${member}.firstName`}
-      type="text"
-      component={CustomInput}
-      width={160}
-      maxLength="20"
-    />
-    <Field
-      label="Last name"
-      name={`${member}.lastName`}
-      type="text"
-      component={CustomInput}
-      width={160}
-      maxLength="20"
-    />
-    <button
+  <Author key={index}>
+    <FirstName member={member}/>
+    <SecondName member={member}/>
+    <DeleteAuthorButton
       type="button"
       title="Remove Member"
       onClick={() => fields.remove(index)}
     >
-      x
-    </button>
-  </li>
+      Delete author above
+    </DeleteAuthorButton>
+  </Author>
 );
 
 const renderAuthors = ({ fields, meta: { error, submitFailed } }) => {

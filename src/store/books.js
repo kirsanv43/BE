@@ -1,60 +1,55 @@
 import { handleActions } from 'redux-actions';
-import {
-  createBook,
-  updateBook,
-  deleteBook,
-} from '../actions';
+import { createBook, updateBook, deleteBook, sort } from '../actions';
+import { FIELDS_NAMES, SORT_METHODS } from '../constants';
+import { generateGuid, syncAndReturn, getSortMethod, syncWithStore } from './utils';
+import { sortFunctions } from '../helpers';
 
-function generateGuid() {
-  return Math.random().toString(36).substring(2, 15) +
-      Math.random().toString(36).substring(2, 15);
-}
+const INIT_DATA = JSON.parse(localStorage.getItem('books')) || {
+  books: [],
+  sortField: FIELDS_NAMES.TITLE,
+  method: SORT_METHODS.ASC
+};
 
-const syncWithStore = (books) => {
-  localStorage.setItem('books', JSON.stringify(books))
-}
 
-const INIT_DATA = { books: JSON.parse(localStorage.getItem('books')) || [] }
-
-const currencies = handleActions(
+const books = handleActions(
   {
     [createBook.toString()]: (state, action) => {
-      const books = [...state.books]
-      const book = action.payload
-      book.id = generateGuid()
-      books.push(book)
-      syncWithStore(books)
-      return {
-        ...state,
-        books,
-      };
+      const books = [...state.books];
+      const book = action.payload;
+      book.id = generateGuid();
+      books.push(book);
+      return syncAndReturn(state, sortFunctions[state.sortField](books, state.method));
     },
     [updateBook.toString()]: (state, action) => {
-      const books = [...state.books]
-      const newBook = action.payload
-      const bookIndex = books.indexOf(book => book.id === newBook.id)
-      books[bookIndex] = newBook
-      syncWithStore(books)
-      return {
-        ...state,
-        books,
-      };
+      const books = [...state.books];
+      const newBook = action.payload;
+      const bookIndex = books.findIndex(book => book.id === newBook.id);
+      books[bookIndex] = newBook;
+      return syncAndReturn(state, sortFunctions[state.sortField](books, state.method));
     },
-    [deleteBook.toString()]: (state, action) => { 
-      debugger
-      const books = [...state.books]
-      const id = action.payload
-      const bookIndex = state.books.findIndex(book => book.id === id)
-      books.splice(bookIndex, 1) 
-      syncWithStore(books)
-      return {
-        ...state,
-        books,
-      };
+    [deleteBook.toString()]: (state, action) => {
+      const books = [...state.books];
+      const id = action.payload;
+      const bookIndex = state.books.findIndex(book => book.id === id);
+      books.splice(bookIndex, 1);
+      return syncAndReturn(state, books);
     },
-    
+    [sort.toString()]: (state, action) => {
+      const books = [...state.books];
+      const {name} = action.payload;
+      const method = getSortMethod(state.method, state.sortField, name)
+      const sortedBooks = sortFunctions[name](books, method)
+
+      const newState = {
+        books: sortedBooks,
+        sortField: name,
+        method: method
+      }
+      syncWithStore(newState)
+      return newState
+    }
   },
   INIT_DATA
 );
 
-export default currencies;
+export default books;

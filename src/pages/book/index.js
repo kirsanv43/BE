@@ -9,6 +9,7 @@ export default connect(
     const { id } = props.match.params;
     const data = {};
     if (id !== 'new') {
+      data.isItEditMode = true;
       data.initialValues = getBookById(id);
     }
 

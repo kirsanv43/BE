@@ -1,17 +1,11 @@
 import React from 'react';
 import { StyledInput, Error, FieldContainer } from './styledTegs';
+import { floatNumberKeyCodes } from './constants';
 
-const floatNumberKeyCodes = [
-  69,  // e
-  189, // -
-  187, // +
-  188, // .
-  190, // ,
-]
+
 const withoutFloatSymbols = (e) => {
   if(floatNumberKeyCodes.includes(e.keyCode)) {
     e.preventDefault();
-    e.stopPropagation();
   }
 }
 

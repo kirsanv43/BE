@@ -1,9 +1,9 @@
 import React from 'react';
 import { Field, FieldArray } from 'redux-form';
-import CustomInput from './customInput';
+import CustomInput from './inputs/customInput';
 import { FieldContainer } from './styledTegs';
-import renderAuthors from './authors';
-import ImageUploadInput from './imageUploadInput';
+import renderAuthors from './inputs/authors';
+import ImageUploadInput from './inputs/imageUploadInput';
 import { FIELDS_NAMES } from '../../constants';
 
 export const Title = props => (

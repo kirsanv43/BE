@@ -1,7 +1,7 @@
 import React from 'react';
-import { Error, DeleteAuthorButton } from './styledTegs';
-import { FirstName, SecondName } from './fields';
-import { Author } from './styledTegs';
+import { Error, DeleteAuthorButton } from '../styledTegs';
+import { FirstName, SecondName } from '../fields';
+import { Author } from '../styledTegs';
 
 const renderAuthor = (member, index, fields) => (
   <Author key={index}>

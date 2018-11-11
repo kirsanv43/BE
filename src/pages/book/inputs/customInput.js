@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyledInput, Error, FieldContainer } from './styledTegs';
-import { floatNumberKeyCodes } from './constants';
+import { StyledInput, Error, FieldContainer } from '../styledTegs';
+import { floatNumberKeyCodes } from '../constants';
 
 
 const withoutFloatSymbols = (e) => {

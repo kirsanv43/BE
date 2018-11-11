@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInput, FieldContainer, Image } from './styledTegs';
+import { StyledInput, FieldContainer, Image } from '../styledTegs';
 
 const onChange = cb => e => {
   const file = e.target.files[0];

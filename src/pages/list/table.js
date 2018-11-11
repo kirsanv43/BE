@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 
+
+
 const Table = ({ currency, data, loading, onRowClick }) => (
   <table className="dataTable">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Symbol</th>
-        <th>Market Cap</th>
-        <th>Price</th>
-        <th>Circulating Supply</th>
-        <th>Volume (24h)</th>
-        <th>% 1h</th>
-        <th>% 24h</th>
-        <th>% 7d</th>
+        <th>title</th>
+        <th>authors</th>
+        <th>Pages count</th>
+        <th>Publisher name</th>
+        <th>Year of publication</th>
+        <th>Release date</th>
+        <th>ISBN</th>
       </tr>
     </thead>
     <tbody>
@@ -36,21 +35,6 @@ const Table = ({ currency, data, loading, onRowClick }) => (
               <td>
                 {currency}:{' '}
                 {item.quotes[currency] && item.quotes[currency].volume_24h}
-              </td>
-              <td>
-                {item.quotes[currency] &&
-                  item.quotes[currency].percent_change_1h}
-                %
-              </td>
-              <td>
-                {item.quotes[currency] &&
-                  item.quotes[currency].percent_change_24h}
-                %
-              </td>
-              <td>
-                {item.quotes[currency] &&
-                  item.quotes[currency].percent_change_7d}
-                %
               </td>
             </tr>
           ))}

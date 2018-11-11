@@ -5,6 +5,7 @@
   "dependencies": {
     "connected-react-router": "^4.5.0",
     "history": "^4.7.2",
+    "isbn-validate": "^1.0.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.0",
@@ -12,8 +13,10 @@
     "react-scripts": "2.1.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.3",
+    "redux-form": "^7.4.2",
     "redux-saga": "^0.16.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
